@@ -1,0 +1,7 @@
+streamlit
+pandas
+requests
+pydeck
+openrouteservice
+pyomo
+highspy

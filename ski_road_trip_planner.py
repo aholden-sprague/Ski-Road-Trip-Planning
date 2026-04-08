@@ -729,7 +729,7 @@ def build_route_segments_from_directions(api_key: str, legs: List[Dict], trip_co
 def main() -> None:
     st.set_page_config(page_title="Ski Road Trip Planner", layout="wide")
     st.title("Ski Road Trip Planner")
-    st.caption("Plan multi-stop ski trips with routing, snowfall forecasts, and a Pyomo MILP itinerary model")
+    st.caption("Plan multi-stop ski trips with routing, snowfall forecasts, and a MILP itinerary model")
 
     api_key = ORS_API_KEY
     if not api_key or api_key == "your_openrouteservice_key":
@@ -942,7 +942,7 @@ def main() -> None:
     st.dataframe(itinerary_df, width="stretch", hide_index=True)
 
     st.subheader("Day-by-day itinerary")
-    st.caption("At most one ski resort is scheduled per day. When return home is enabled, the model requires the final resort to have a feasible drive home within your daily limit, and the app always places that return on its own extra day.")
+    st.caption("At most one ski resort is scheduled per day. When return home is enabled, the model requires the final resort to have a feasible drive home within your daily limit, and places that return on its own extra day.")
     for day in sorted(itinerary_df["day"].unique().tolist()):
         day_legs = itinerary_df[itinerary_df["day"] == day]
         day_drive = day_legs["drive_hours"].sum()
@@ -1027,7 +1027,7 @@ def main() -> None:
         """
         Resorts are scored using forecast snowfall, temperature, wind, vertical drop, and drive time from the start.
 
-        After scoring, the app keeps at most the nearest 55 resorts and solves a day-indexed Pyomo MILP:
+        After scoring, keeps at most the nearest 55 resorts and solves a day-indexed MILP:
         - each day can have at most one ski resort
         - each resort can be visited at most once
         - days are contiguous from day 1 onward

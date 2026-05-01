@@ -272,7 +272,7 @@ def geocode_place(api_key: str, query: str) -> Tuple[float, float, str]:
     label = feat["properties"].get("label", query)
     return lat, lon, label
 
-
+ 
 def get_matrix(api_key: str, locations: List[List[float]], profile: str = DEFAULT_PROFILE) -> Dict:
     url = f"{ORS_BASE_URL}/v2/matrix/{profile}"
     payload = {"locations": locations, "metrics": ["distance", "duration"], "units": "mi"}
